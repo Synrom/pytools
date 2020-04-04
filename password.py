@@ -61,7 +61,9 @@ def gen_num(pwd):
         yield pwd + num2
     for num in range(start_num,year+1):
         yield pwd + str(num)
+        yield pwd + str(num-(num/100 * 100))
         yield str(num) + pwd
+        yield str(num-(num/100 * 100)) + pwd
     for date in gen_dates():
         yield pwd + date
         yield date + pwd
