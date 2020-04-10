@@ -3,4 +3,6 @@ section .text
 global _start
 
 _start:
-	lea	rsp,[rip]
+	sub	rsp,400
+	je	0x5678
+
