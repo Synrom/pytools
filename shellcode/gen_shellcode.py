@@ -59,15 +59,14 @@ def find_instrs(addr):
             if "syscall" in instr[ u'disasm' ]:
                 syscalls.append(instr[ u'offset' ])
             else:
-                functions.append(instr[ u'offset' ])
-                addrn = instr[ u'disasm' ].split(" ")[1]
-                find_instrs(addrn)
-                r2.cmd("s "+hex(addr))
+                if instr[ u'offset' ] not in functions:
+                    functions.append(instr[ u'offset' ])
+                    addrn = instr[ u'jump' ]
+                    find_instrs(addrn)
+                    r2.cmd("s "+hex(addr))
         if test_jmp(instr[ u'disasm' ]):
             scope = (instr[ u'jump' ] - instr[ u'offset' ]) 
-            print "scope = "+str(scope)
             scope -=  instr[ u'size' ]
-            print "scope = "+str(scope)
             jmps.update({instr[ u'offset' ]:[scope,0]})
 
 
@@ -166,6 +165,7 @@ for item in functions_r2_shell:
                 elif jmp > addr:
                     if jmp + scope < addr:
                         scope -= 20
+                jmps[jmp][0] = scope
 
             addr = r2.cmdj("pdj 2")[1][ u'offset']
             r2.cmd("s "+hex(addr))
@@ -176,6 +176,8 @@ for item in functions_r2_shell:
             bytes += "\\x4d\\x89\\xc8"
             bytes += "\\x4c\\x8b\\x4c\\x24\\x08"
             bytes += "\\x0f\\x05"
+        if addr in jmps:
+            jmps[addr][1] = len(bytes)
         byte = r2.cmd("pf b").split(" ")[2][1:].replace("\n","").replace("\t","")
     bytes += "\\xc3"
 
