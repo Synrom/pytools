@@ -104,7 +104,7 @@ while byte != "xc3":
             if jmp < addr:
                 if jmp + scope >= addr:
                     scope += 20
-            if jmp > addr:
+            elif jmp > addr:
                 if jmp + scope < addr:
                     scope -= 20
             #print "new scope = "+str(scope)
@@ -158,6 +158,15 @@ for item in functions_r2_shell:
             addr = r2.cmdj("pdj 2")[1][ u'offset' ]
             r2.cmd("s "+hex(addr))
         if addr in syscalls:
+            for jmp in jmps:
+                scope = jmps[jmp][0]
+                if jmp < addr:
+                    if jmp + scope >= addr:
+                        scope += 20
+                elif jmp > addr:
+                    if jmp + scope < addr:
+                        scope -= 20
+
             addr = r2.cmdj("pdj 2")[1][ u'offset']
             r2.cmd("s "+hex(addr))
             bytes += "\\x48\\x89\\xf8\\x48\\x89\\xf7"
