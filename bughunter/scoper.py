@@ -192,15 +192,34 @@ def find_calls_by_dir(func,directon,tags,searchdir):
         elif isdir(directon+"/"+file):
             find_calls_by_dir(func,directon+"/"+file,tags,searchdir)
     
-tags = CTags("/home/synrom/linux/tags")
+import threading
+
+class FunctionHandler(threading.Thread):
+    def __init__(self,tag):
+        threading.Thread.__init__(self)
+        self.tag = tag
+    def run(self):
+        func = find_func_by_tag(self.tag,"/home/synrom/lego/linux")
+        if func == ():
+            return
+        if "DEFINE" in func[1]:
+            return
+        #print "searching for function "+func[1]
+        find_calls_by_dir(func,"/home/synrom/lego/linux",tags,"/home/synrom/lego/linux/")
+
+
+
+tags = CTags("/home/synrom/lego/linux/tags")
 for tag in tags.tags():
     if tag.kind == "function":
-        func = find_func_by_tag(tag,"/home/synrom/linux")
-        if func != ():
-            if "DEFINE" in func[1]:
-                continue
-            print "search for function "+func[1]
-            find_calls_by_dir(func,"/home/synrom/linux",tags,"/home/synrom/linux/")
+        f = FunctionHandler(tag)
+        f.start()
+        #func = find_func_by_tag(tag,"/home/synrom/lego/linux")
+        #if func != ():
+        #    if "DEFINE" in func[1]:
+        #        continue
+        #    print "search for function "+func[1]
+        #    find_calls_by_dir(func,"/home/synrom/lego/linux",tags,"/home/synrom/lego/linux/")
      
     
     
