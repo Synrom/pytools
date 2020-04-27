@@ -1,0 +1,4 @@
+ ------------------ found something ------------------
+1: /home/synrom/lego/linux/fs/cifs/connect.c -> CIFSSMBSetFSUnixInfo at 3624
+ ------------------ found something ------------------
+1: /home/synrom/lego/linux/fs/cifs/connect.c -> CIFSSMBQFSUnixInfo at 3561
