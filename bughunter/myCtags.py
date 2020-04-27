@@ -32,8 +32,15 @@ def getline(c,i):
 
 class CTags:
     def __init__(self,filename):
-        with open(filename,"r") as f:
-            self.tagfile = f.read()
+        while True:
+            try:
+                with open(filename,"r") as f:
+                    self.tagfile = f.read()
+                break
+            except OSError:
+                continue
+            except IOError:
+                continue
         self.lineNumber = -1
     def tags(self):
         for line in self.tagfile.split("\n")[7:]:

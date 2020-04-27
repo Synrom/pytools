@@ -1,0 +1,80 @@
+ ------------------ found something ------------------
+1: /home/synrom/lego/linux/fs/cifs/connect.c -> CIFSSMBSetFSUnixInfo at 3624
+ ------------------ found something ------------------
+1: /home/synrom/lego/linux/fs/cifs/connect.c -> CIFSSMBQFSUnixInfo at 3561
+ ------------------ found something ------------------
+2: /home/synrom/lego/linux/lib/test_bitmap.c -> __bitmap_clear at 350
+ ------------------ found something ------------------
+2: /home/synrom/lego/linux/lib/test_bitmap.c -> __bitmap_set at 339
+ ------------------ found something ------------------
+1: /home/synrom/lego/linux/security/integrity/ima/ima_crypto.c -> __get_free_pages at 132
+ ------------------ found something ------------------
+2: /home/synrom/lego/linux/mm/slab.c -> __alloc_alien_cache at 702
+ ------------------ found something ------------------
+1: /home/synrom/lego/linux/mm/mempolicy.c -> __alloc_pages_nodemask at 2057
+ ------------------ found something ------------------
+1: /home/synrom/lego/linux/fs/cifs/connect.c -> SendReceive at 4274
+ ------------------ found something ------------------
+1: /home/synrom/lego/linux/mm/mempolicy.c -> __alloc_pages_node at 2049
+ ------------------ found something ------------------
+2: /home/synrom/lego/linux/fs/ocfs2/ocfs2.h -> __clear_bit_le at 892
+ ------------------ found something ------------------
+2: /home/synrom/lego/linux/fs/f2fs/inline.c -> __clear_bit_le at 609
+ ------------------ found something ------------------
+2: /home/synrom/lego/linux/lib/bitmap.c -> __reg_op at 1061
+ ------------------ found something ------------------
+2: /home/synrom/lego/linux/fs/f2fs/dir.c -> __clear_bit_le at 716
+ ------------------ found something ------------------
+2: /home/synrom/lego/linux/fs/f2fs/node.c -> __clear_bit_le at 2052
+ ------------------ found something ------------------
+2: /home/synrom/lego/linux/fs/f2fs/node.c -> __clear_bit_le at 2695
+ ------------------ found something ------------------
+2: /home/synrom/lego/linux/fs/f2fs/node.c -> __clear_bit_le at 2699
+ ------------------ found something ------------------
+2: /home/synrom/lego/linux/fs/f2fs/node.c -> __clear_bit_le at 2703
+ ------------------ found something ------------------
+2: /home/synrom/lego/linux/lib/bitmap.c -> __reg_op at 1063
+ ------------------ found something ------------------
+2: /home/synrom/lego/linux/lib/bitmap.c -> __reg_op at 1083
+ ------------------ found something ------------------
+2: /home/synrom/lego/linux/lib/bitmap.c -> __reg_op at 1100
+ ------------------ found something ------------------
+2: /home/synrom/lego/linux/lib/bitmap.c -> __reg_op at 1102
+ ------------------ found something ------------------
+2: /home/synrom/lego/linux/lib/radix-tree.c -> __set_bit at 155
+ ------------------ found something ------------------
+  ------------------ found something ------------------
+2: /home/synrom/lego/linux/lib/radix-tree.c -> __set_bit at 155
+2: /home/synrom/lego/linux/lib/radix-tree.c -> __set_bit at 155
+ ------------------ found something ------------------
+2: /home/synrom/lego/linux/lib/radix-tree.c -> __set_bit at 155
+ ------------------ found something ------------------
+1: /home/synrom/lego/linux/virt/kvm/kvm_main.c -> __cpumask_set_cpu at 233
+ ------------------ found something ------------------
+2: /home/synrom/lego/linux/mm/page_alloc.c -> __mod_zone_freepage_state at 664
+ ------------------ found something ------------------
+2: /home/synrom/lego/linux/mm/page_alloc.c -> __mod_zone_freepage_state at 685
+ ------------------ found something ------------------
+2: /home/synrom/lego/linux/mm/page_alloc.c -> __mod_zone_freepage_state at 789
+ ------------------ found something ------------------
+2: /home/synrom/lego/linux/mm/page_alloc.c -> __mod_zone_freepage_state at 2871
+ ------------------ found something ------------------
+2: /home/synrom/lego/linux/mm/page_alloc.c -> __mod_zone_freepage_state at 3009
+ ------------------ found something ------------------
+1: /home/synrom/lego/linux/virt/kvm/arm/hyp/vgic-v3-sr.c -> __gic_v3_get_lr at 237
+ ------------------ found something ------------------
+1: /home/synrom/lego/linux/virt/kvm/arm/hyp/vgic-v3-sr.c -> __gic_v3_get_lr at 464
+ ------------------ found something ------------------
+1: /home/synrom/lego/linux/virt/kvm/arm/hyp/vgic-v3-sr.c -> __gic_v3_get_lr at 502
+ ------------------ found something ------------------
+2: /home/synrom/lego/linux/mm/page_alloc.c -> __rmqueue_pcplist at 2962
+ ------------------ found something ------------------
+2: /home/synrom/lego/linux/mm/page_alloc.c -> __rmqueue_fallback at 2450
+ ------------------ found something ------------------
+2: /home/synrom/lego/linux/mm/page_alloc.c -> __rmqueue at 2471
+ ------------------ found something ------------------
+2: /home/synrom/lego/linux/mm/page_alloc.c -> __rmqueue_fallback at 2450
+ ------------------ found something ------------------
+2: /home/synrom/lego/linux/mm/page_alloc.c -> __rmqueue at 3004
+ ------------------ found something ------------------
+1: /home/synrom/lego/linux/arch/mips/cavium-octeon/smp.c -> CVMX_CIU_MBOX_SETX at 105

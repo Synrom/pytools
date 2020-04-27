@@ -9,79 +9,85 @@ from myCtags import *
 from strip import *
 
 def function_scope(filename,lineNumber,direction):
-    with open(direction+"/"+filename,"r") as f:
-        nline = lineNumber
-        com = ""
-        c = 0
-        status = 1
-        i = 0
-        for line in f.readlines()[lineNumber - 1:]:
-            if nline < lineNumber:
-                nline += 1
-                continue
-            while status == 1 and i < len(line):
-                if com == "":
-                    if i+1 < len(line) and line[i:i+2] in ["/*","//"]:
-                        if line[i:i+2] == "/*":
-                            com = "*/"
+    while True:
+        try:
+            with open(direction+"/"+filename,"r") as f:
+                nline = lineNumber
+                com = ""
+                c = 0
+                status = 1
+                i = 0
+                for line in f.readlines()[lineNumber - 1:]:
+                    if nline < lineNumber:
+                        nline += 1
+                        continue
+                    while status == 1 and i < len(line):
+                        if com == "":
+                            if i+1 < len(line) and line[i:i+2] in ["/*","//"]:
+                                if line[i:i+2] == "/*":
+                                    com = "*/"
+                                else:
+                                    com = "\n"
+                                i += 1
+                            elif line[i] in "\"'":
+                                com  = line[i]
+                            elif line[i] == "(":
+                                c += 1
+                            elif line[i] == ")":
+                                c -= 1
+                                if c == 0:
+                                    status = 2
                         else:
-                            com = "\n"
+                            if i+(len(com) - 1) < len(line) and line[i:i+len(com)] == com:
+                                i += len(com) - 1
+                                com = ""
                         i += 1
-                    elif line[i] in "\"'":
-                        com  = line[i]
-                    elif line[i] == "(":
-                        c += 1
-                    elif line[i] == ")":
-                        c -= 1
-                        if c == 0:
-                            status = 2
-                else:
-                    if i+(len(com) - 1) < len(line) and line[i:i+len(com)] == com:
-                        i += len(com) - 1
-                        com = ""
-                i += 1
-            while status == 2 and i < len(line):
-                if com == "":
-                    if i + 1 < len(line) and line[i:i+2] in ["/*","//"]:
-                        if line[i:i+2] == "/*":
-                            com = "*/"
+                    while status == 2 and i < len(line):
+                        if com == "":
+                            if i + 1 < len(line) and line[i:i+2] in ["/*","//"]:
+                                if line[i:i+2] == "/*":
+                                    com = "*/"
+                                else:
+                                    com = "\n"
+                                i += 1
+                            elif line[i] not in " \t\n":
+                                if line[i] != "{":
+                                    return (0,0)
+                                status = 3
+                                break
                         else:
-                            com = "\n"
+                            if i + (len(com) -1) < len(line) and line[i:i+len(com)] == com:
+                                i += len(com) - 1
+                                com = ""
                         i += 1
-                    elif line[i] not in " \t\n":
-                        if line[i] != "{":
-                            return (0,0)
-                        status = 3
-                        break
-                else:
-                    if i + (len(com) -1) < len(line) and line[i:i+len(com)] == com:
-                        i += len(com) - 1
-                        com = ""
-                i += 1
-            while status == 3 and i < len(line):
-                if com == "":
-                    if i+1 < len(line) and line[i:i+2] in ["/*","//"]:
-                        if line[i:i+2] == "/*":
-                            com = "*/"
+                    while status == 3 and i < len(line):
+                        if com == "":
+                            if i+1 < len(line) and line[i:i+2] in ["/*","//"]:
+                                if line[i:i+2] == "/*":
+                                    com = "*/"
+                                else:
+                                    com = "\n"
+                                i += 1
+                            elif line[i] in "\"'":
+                                com = line[i]
+                            elif line[i] == "{":
+                                c += 1
+                            elif line[i] == "}":
+                                c -= 1
+                                if c == 0:
+                                    return (lineNumber,nline)
                         else:
-                            com = "\n"
+                            if i+(len(com)-1) < len(line) and line[i:i+len(com)] == com:
+                                i += len(com) - 1
+                                com = ""
                         i += 1
-                    elif line[i] in "\"'":
-                        com = line[i]
-                    elif line[i] == "{":
-                        c += 1
-                    elif line[i] == "}":
-                        c -= 1
-                        if c == 0:
-                            return (lineNumber,nline)
-                else:
-                    if i+(len(com)-1) < len(line) and line[i:i+len(com)] == com:
-                        i += len(com) - 1
-                        com = ""
-                i += 1
-            nline += 1
-            i =0
-    return (0,0)
+                    nline += 1
+                    i =0
+            return (0,0)
+        except OSError:
+            continue
+        except IOError:
+            continue
 
 
 

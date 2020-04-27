@@ -86,8 +86,15 @@ def split_op(pattern):
 def find_type_by_varname(var,fname,lineNumber,tags,searchfile):
     if var == "":
         return {}
-    with open(fname,"r") as f:
-        content = f.read()
+    while True:
+        try:
+            with open(fname,"r") as f:
+                content = f.read()
+            break
+        except OSError:
+            continue
+        except IOError:
+            continue
     call = content.find(var)
     status = 1
     if var in "unsigned int":
@@ -127,8 +134,15 @@ def find_calls_by_file(func,filename,tags,direction,searchfile):
     if func[1] == "":
         return 
     lines = 1
-    with open(filename,"r") as f:
-        content = f.read()
+    while True:
+        try:
+            with open(filename,"r") as f:
+                content = f.read()
+            break
+        except OSError:
+            continue
+        except IOError:
+            continue
     call = content.find(func[1])
     lines += content[:call].count("\n")
     while call != -1:
@@ -139,7 +153,7 @@ def find_calls_by_file(func,filename,tags,direction,searchfile):
             continue
         patterns = test_call(content[call:],func[1])
         if patterns:
-            print "found a call of "+func[1]+" in "+filename+" at "+str(lines)
+            #print "found a call of "+func[1]+" in "+filename+" at "+str(lines)
             patterns = strip_calls(strip_comments(patterns))
             patterns = patterns.split(",")
             for parameter in func[2]:
@@ -166,31 +180,40 @@ def find_calls_by_file(func,filename,tags,direction,searchfile):
                     if ptype in ["unsignedint","signedint","int"]:
                         if ptype != func[2][parameter]:
                             if ptype in ["signedint","int"] and func[2][parameter][0] == "unsignedint":
-                                print filename+" -> "+func[1]
+                                print " ------------------ found something ------------------"
+                                print "1: "+filename+" -> "+func[1]+" at "+str(lines)
                             elif ptype == "unsignedint" and func[2][parameter][0] in ["signedint","int"]:
-                                print filename+" -> "+func[1]
+                                print " ------------------ found something ------------------"
+                                print "2: "+filename+" -> "+func[1]+" at "+str(lines)
                             else:
                                 pass
-                                print "ptype = "+str(ptype)
-                                print "func[2][parameter] = "+str(func[2][parameter])
+                                #print "ptype = "+str(ptype)
+                                #print "func[2][parameter] = "+str(func[2][parameter])
                         else:
                             pass
-                            print "ptype = "+str(ptype)
-                            print "func[2][parameter] = "+str(func[2][parameter])
+                            #print "ptype = "+str(ptype)
+                            #print "func[2][parameter] = "+str(func[2][parameter])
 
         content = content[call + 1:]
         call = content.find(func[1])
         lines += content[:call].count("\n")
 
 def find_calls_by_dir(func,directon,tags,searchdir):
-    for file in listdir(directon):
-        if isfile(directon+"/"+file) and file[-2:] in [".c",".h"]:
-            #print "searching in "+directon+"/"+file
-            searchfile = directon+"/"+file
-            searchfile = searchfile[searchfile.find(searchdir)+len(searchdir):]
-            find_calls_by_file(func,directon+"/"+file,tags,directon,searchfile)
-        elif isdir(directon+"/"+file):
-            find_calls_by_dir(func,directon+"/"+file,tags,searchdir)
+    while True:
+        try:
+            for file in listdir(directon):
+                if isfile(directon+"/"+file) and file[-2:] in [".c",".h"]:
+                    #print "searching in "+directon+"/"+file
+                    searchfile = directon+"/"+file
+                    searchfile = searchfile[searchfile.find(searchdir)+len(searchdir):]
+                    find_calls_by_file(func,directon+"/"+file,tags,directon,searchfile)
+                elif isdir(directon+"/"+file):
+                    find_calls_by_dir(func,directon+"/"+file,tags,searchdir)
+            return
+        except OSError:
+            continue
+        except IOError:
+            continue
     
 import threading
 
