@@ -1,0 +1,34 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_OUTPUT_MODE	u-ctags	/u-ctags or e-ctags/
+!_TAG_PROGRAM_AUTHOR	Universal Ctags Team	//
+!_TAG_PROGRAM_NAME	Universal Ctags	/Derived from Exuberant Ctags/
+!_TAG_PROGRAM_URL	https://ctags.io/	/official site/
+!_TAG_PROGRAM_VERSION	0.0.0	//
+CTags	myCtags.py	/^class CTags:$/;"	class	line:33
+FunctionHandler	scoper.py	/^class FunctionHandler(threading.Thread):$/;"	class	line:226
+Tag	myCtags.py	/^class Tag:$/;"	class	line:3
+__getitem__	myCtags.py	/^    def __getitem__(self,t):$/;"	member	line:11	class:Tag	signature:(self,t)
+__init__	myCtags.py	/^    def __init__(self,filename):$/;"	member	line:34	class:CTags	signature:(self,filename)
+__init__	myCtags.py	/^    def __init__(self,filename,pattern,lineNumber,kind):$/;"	member	line:4	class:Tag	signature:(self,filename,pattern,lineNumber,kind)
+__init__	scoper.py	/^    def __init__(self,tag):$/;"	member	line:227	class:FunctionHandler	signature:(self,tag)
+__str__	myCtags.py	/^    def __str__(self):$/;"	member	line:9	class:Tag	signature:(self)
+check	functions.py	/^def check(ptypes):$/;"	function	line:125	signature:(ptypes)
+f	scoper.py	/^        f = FunctionHandler(tag)$/;"	variable	line:244
+find_calls_by_dir	scoper.py	/^def find_calls_by_dir(func,directon,tags,searchdir):$/;"	function	line:207	signature:(func,directon,tags,searchdir)
+find_calls_by_file	scoper.py	/^def find_calls_by_file(func,filename,tags,direction,searchfile):$/;"	function	line:133	signature:(func,filename,tags,direction,searchfile)
+find_func_by_name	myCtags.py	/^    def find_func_by_name(self,fname):$/;"	member	line:66	class:CTags	signature:(self,fname)
+find_func_by_tag	functions.py	/^def find_func_by_tag(e,direction):$/;"	function	line:136	signature:(e,direction)
+find_type_by_funcname	functions.py	/^def find_type_by_funcname(fname,tags,direction):$/;"	function	line:182	signature:(fname,tags,direction)
+find_type_by_varname	scoper.py	/^def find_type_by_varname(var,fname,lineNumber,tags,searchfile):$/;"	function	line:86	signature:(var,fname,lineNumber,tags,searchfile)
+find_vars_by_line	functions.py	/^def find_vars_by_line(line):$/;"	function	line:95	signature:(line)
+function_scope	functions.py	/^def function_scope(filename,lineNumber,direction):$/;"	function	line:11	signature:(filename,lineNumber,direction)
+get_funcs_by_file	myCtags.py	/^    def get_funcs_by_file(self,fname):$/;"	member	line:55	class:CTags	signature:(self,fname)
+getline	myCtags.py	/^def getline(c,i):$/;"	function	line:21	signature:(c,i)
+run	scoper.py	/^    def run(self):$/;"	member	line:230	class:FunctionHandler	signature:(self)
+split_op	scoper.py	/^def split_op(pattern):$/;"	function	line:63	signature:(pattern)
+strip_calls	strip.py	/^def strip_calls(content):$/;"	function	line:30	signature:(content)
+strip_comments	strip.py	/^def strip_comments(content):$/;"	function	line:3	signature:(content)
+tags	myCtags.py	/^    def tags(self):$/;"	member	line:45	class:CTags	signature:(self)
+tags	scoper.py	/^tags = CTags("\/home\/synrom\/lego\/linux\/tags")$/;"	variable	line:241
+test_call	scoper.py	/^def test_call(call,fname):$/;"	function	line:9	signature:(call,fname)
