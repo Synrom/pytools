@@ -186,6 +186,7 @@ def find_type_by_funcname(fname,tags,direction):
             continue
         if func[1] == fname:
             return func[2][0]
+    return ""
 
 ##print strip_comments("/^unsigned 	\/* asdf *\/ int ooo;$/")
 ##print strip_calls(strip_comments("/^unsigned int ooo = print(ha /* ) */llo,o(o,q));$/"))

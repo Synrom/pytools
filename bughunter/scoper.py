@@ -4,7 +4,28 @@ from os import listdir
 from strip import strip_comments,strip_calls
 from myCtags import *
 from functions import *
+import signal
+import sys
 
+log = 0
+
+def one_handler(a,b):
+    global log
+    sys.stdout.write("start logging ...")
+    sys.stdout.flush()
+    while True:
+        try:
+            with open("bughunter.log","w") as f:
+                f.write(str(log))
+            sys.stdout.write("done\n")
+            sys.stdout.flush()
+            exit(1)
+        except IOError:
+            continue
+        except OSError:
+            continue
+
+signal.signal(1,one_handler)
 
 def test_call(call,fname):
     if call[:len(fname)] != fname:
@@ -85,7 +106,7 @@ def split_op(pattern):
 
 def find_type_by_varname(var,fname,lineNumber,tags,searchfile):
     if var == "":
-        return {}
+        return ""
     while True:
         try:
             with open(fname,"r") as f:
@@ -127,7 +148,7 @@ def find_type_by_varname(var,fname,lineNumber,tags,searchfile):
                     continue
                 if var == func[2][i][1]:
                     return func[2][i][0]
-    return {}
+    return ""
 
 
 def find_calls_by_file(func,filename,tags,direction,searchfile):
@@ -177,12 +198,14 @@ def find_calls_by_file(func,filename,tags,direction,searchfile):
                         ptype = find_type_by_funcname(p[:p.find("(")],tags,direction)
                     else:
                         ptype = find_type_by_varname(p,filename,lines,tags,searchfile)
+                    ptype = ptype.replace("const","")
+                    ftype = func[2][parameter][0].replace("const","")
                     if ptype in ["unsignedint","signedint","int"]:
-                        if ptype != func[2][parameter]:
-                            if ptype in ["signedint","int"] and func[2][parameter][0] == "unsignedint":
+                        if ptype != ftype:
+                            if ptype in ["signedint","int"] and ftype == "unsignedint":
                                 print " ------------------ found something ------------------"
                                 print "1: "+filename+" -> "+func[1]+" at "+str(lines)
-                            elif ptype == "unsignedint" and func[2][parameter][0] in ["signedint","int"]:
+                            elif ptype == "unsignedint" and ftype in ["signedint","int"]:
                                 print " ------------------ found something ------------------"
                                 print "2: "+filename+" -> "+func[1]+" at "+str(lines)
                             else:
@@ -223,17 +246,28 @@ class FunctionHandler(threading.Thread):
         self.tag = tag
     def run(self):
         func = find_func_by_tag(self.tag,"/home/synrom/lego/linux")
-        if func == ():
-            return
-        if "DEFINE" in func[1]:
-            return
+        if func != () and "DEFINE" not in func[1]:
+            find_calls_by_dir(func,"/home/synrom/lego/linux",tags,"/home/synrom/lego/linux/")
+        global log
+        log += 1
         #print "searching for function "+func[1]
-        find_calls_by_dir(func,"/home/synrom/lego/linux",tags,"/home/synrom/lego/linux/")
 
 
+while True:
+    try:
+        with open("bughunter.log","r") as f:
+            log = int(f.readline(),10)
+        break
+    except OSError:
+        continue
+    except IOError:
+        continue
 
-tags = CTags("/home/synrom/lego/linux/tags")
+tags = CTags("/home/synrom/lego/linux/tags",log)
 for tag in tags.tags():
+    if tag == ():
+        log += 1
+        continue
     if tag.kind == "function":
         f = FunctionHandler(tag)
         f.start()
@@ -243,6 +277,10 @@ for tag in tags.tags():
         #        continue
         #    print "search for function "+func[1]
         #    find_calls_by_dir(func,"/home/synrom/lego/linux",tags,"/home/synrom/lego/linux/")
+    else:
+        log += 1
+    
+
      
     
     

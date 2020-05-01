@@ -1,5 +1,6 @@
 #! /usr/bin/python2.7
 
+
 class Tag:
     def __init__(self,filename,pattern,lineNumber,kind):
         self.file = filename
@@ -31,7 +32,7 @@ def getline(c,i):
     return line
 
 class CTags:
-    def __init__(self,filename):
+    def __init__(self,filename,log):
         while True:
             try:
                 with open(filename,"r") as f:
@@ -41,15 +42,19 @@ class CTags:
                 continue
             except IOError:
                 continue
+        self.log = log
         self.lineNumber = -1
     def tags(self):
-        for line in self.tagfile.split("\n")[7:]:
+        for line in self.tagfile.split("\n")[7+self.log:]:
             if "\t" not in line:
+                yield ()
                 continue
             line = line.replace("\n","").split("\t")
             if line[1][-2:] not in [".h",".c"]:
+                yield ()
                 continue
             if line[3] not in ["variable","function"]:
+                yield ()
                 continue
             yield Tag(line[1],line[2],int(line[4][line[4].find(":") + 1:],10),line[3])
     def get_funcs_by_file(self,fname):
