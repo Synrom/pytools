@@ -19,6 +19,88 @@ class Tag:
         if t == "kind":
             return self.kind
 
+def getscope(filename,lineNumber):
+    while True:
+        try:
+            with open(filename,"r") as f:
+                nline = lineNumber
+                com = ""
+                c = 0
+                status = 1
+                i = 0
+                for line in f.readlines()[lineNumber - 1:]:
+                    if nline < lineNumber:
+                        nline += 1
+                        continue
+                    while status == 1 and i < len(line):
+                        if com == "":
+                            if i+1 < len(line) and line[i:i+2] in ["/*","//"]:
+                                if line[i:i+2] == "/*":
+                                    com = "*/"
+                                else:
+                                    com = "\n"
+                                i += 1
+                            elif line[i] in "\"'":
+                                com  = line[i]
+                            elif line[i] == "(":
+                                c += 1
+                            elif line[i] == ")":
+                                c -= 1
+                                if c == 0:
+                                    status = 2
+                        else:
+                            if i+(len(com) - 1) < len(line) and line[i:i+len(com)] == com:
+                                i += len(com) - 1
+                                com = ""
+                        i += 1
+                    while status == 2 and i < len(line):
+                        if com == "":
+                            if i + 1 < len(line) and line[i:i+2] in ["/*","//"]:
+                                if line[i:i+2] == "/*":
+                                    com = "*/"
+                                else:
+                                    com = "\n"
+                                i += 1
+                            elif line[i] not in " \t\n":
+                                if line[i] != "{":
+                                    return 0
+                                status = 3
+                                break
+                        else:
+                            if i + (len(com) -1) < len(line) and line[i:i+len(com)] == com:
+                                i += len(com) - 1
+                                com = ""
+                        i += 1
+                    while status == 3 and i < len(line):
+                        if com == "":
+                            if i+1 < len(line) and line[i:i+2] in ["/*","//"]:
+                                if line[i:i+2] == "/*":
+                                    com = "*/"
+                                else:
+                                    com = "\n"
+                                i += 1
+                            elif line[i] in "\"'":
+                                com = line[i]
+                            elif line[i] == "{":
+                                c += 1
+                            elif line[i] == "}":
+                                c -= 1
+                                if c == 0:
+                                    return nline
+                        else:
+                            if i+(len(com)-1) < len(line) and line[i:i+len(com)] == com:
+                                i += len(com) - 1
+                                com = ""
+                        i += 1
+                    nline += 1
+                    i =0
+            return 0
+        except OSError:
+            continue
+        except IOError:
+            continue
+
+
 def getline(c,i):
     line = ""
     id = i
@@ -32,7 +114,7 @@ def getline(c,i):
     return line
 
 class CTags:
-    def __init__(self,filename,log):
+    def __init__(self,filename,log=0):
         while True:
             try:
                 with open(filename,"r") as f:
@@ -77,7 +159,25 @@ class CTags:
                 if line[3] == "function":
                     if line[1][-2:] in [".c",".h"]:
                         yield Tag(line[1],line[2], int(line[4][line[4].find(":") + 1:],10),line[3])
+                        content = content[i+1:]
+                        i = content.find("\n")
+                        content = content[i+1:]
             content = content[i+1:]
             i = content.find(fname)
+    def function_line(self,filename,line_number,direction):
+        content = self.tagfile
+        i = content.find(filename)
+        while i != -1:
+            line = getline(content,i).split("\t")
+            if len(line) >= 5:
+                if line[3] == "function":
+                    number = int(line[4][line[4].find(":") + 1:],10)
+                    if number < line_number:
+                        scope = getscope(direction+"/"+filename, number)
+                        if scope >= line_number:
+                            return Tag(line[1],line[2],number,line[3])
+            content = content[i+1:]
+            i = content.find(filename)
+        print "found no function scope for "+filename+" at "+str(line_number)
 
 

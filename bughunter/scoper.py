@@ -173,7 +173,7 @@ def find_calls_by_file(func,filename,tags,direction,searchfile):
             lines += content[:call].count("\n")
             continue
         patterns = test_call(content[call:],func[1])
-        if patterns:
+        if patterns != False:
             #print "found a call of "+func[1]+" in "+filename+" at "+str(lines)
             patterns = strip_calls(strip_comments(patterns))
             patterns = patterns.split(",")
@@ -253,32 +253,33 @@ class FunctionHandler(threading.Thread):
         #print "searching for function "+func[1]
 
 
-while True:
-    try:
-        with open("bughunter.log","r") as f:
-            log = int(f.readline(),10)
-        break
-    except OSError:
-        continue
-    except IOError:
-        continue
-
-tags = CTags("/home/synrom/lego/linux/tags",log)
-for tag in tags.tags():
-    if tag == ():
-        log += 1
-        continue
-    if tag.kind == "function":
-        f = FunctionHandler(tag)
-        f.start()
-        #func = find_func_by_tag(tag,"/home/synrom/lego/linux")
-        #if func != ():
-        #    if "DEFINE" in func[1]:
-        #        continue
-        #    print "search for function "+func[1]
-        #    find_calls_by_dir(func,"/home/synrom/lego/linux",tags,"/home/synrom/lego/linux/")
-    else:
-        log += 1
+if "__main__" == __name__:
+    while True:
+        try:
+            with open("bughunter.log","r") as f:
+                log = int(f.readline(),10)
+            break
+        except OSError:
+            continue
+        except IOError:
+            continue
+    
+    tags = CTags("/home/synrom/lego/linux/tags",log)
+    for tag in tags.tags():
+        if tag == ():
+            log += 1
+            continue
+        if tag.kind == "function":
+            f = FunctionHandler(tag)
+            f.start()
+            #func = find_func_by_tag(tag,"/home/synrom/lego/linux")
+            #if func != ():
+            #    if "DEFINE" in func[1]:
+            #        continue
+            #    print "search for function "+func[1]
+            #    find_calls_by_dir(func,"/home/synrom/lego/linux",tags,"/home/synrom/lego/linux/")
+        else:
+            log += 1
     
 
      
