@@ -178,6 +178,6 @@ class CTags:
                             return Tag(line[1],line[2],number,line[3])
             content = content[i+1:]
             i = content.find(filename)
-        print "found no function scope for "+filename+" at "+str(line_number)
+        #print "found no function scope for "+filename+" at "+str(line_number)
 
 
