@@ -8,6 +8,7 @@ from scoper import test_call
 from strip import strip_calls, strip_comments
 
 caller = {}
+finisher = []
 
 
 def find_func_by_tag_for_finder(e,direction):
@@ -64,8 +65,9 @@ def find_calls_by_file(func,filename,tags,direction,grad):
                 #print "\t" * grad+calling_function
                 if func[1] not in caller:
                     caller.update({func[1]:[]})
-                caller[func[1]].append(calling_function)
-                one_handler(1,2)
+                if func[1] != calling_function:
+                    caller[func[1]].append((calling_function,filename))
+                    one_handler(1,2)
                 #print caller
                 if r == 1:
                     for funcit in tags.find_func_by_name(calling_function):
@@ -134,11 +136,14 @@ if len(sys.argv)  > 1:
 
 def print_it(func):
     global caller
-    if func not in caller:
-        print func
-        return
-    for call in caller[func]:
-        print_it(call)
+    global finisher
+    if func in caller:
+        for func,filename in caller[func]:
+            if (func,filename) not in finisher:
+                if print_it(func):
+                    finisher.append((func,filename))
+        return False
+    return True
 
 
 def one_handler(a,b):
@@ -147,10 +152,13 @@ def one_handler(a,b):
     print ""
     global caller
     global finder
-    if finder not in caller:
+    global finisher
+    if print_it(finder):
         print finder
         return
-    print_it(finder)
+    for finish in finisher:
+        print finish
+    finisher = []
 
 import signal
 signal.signal(1,one_handler)

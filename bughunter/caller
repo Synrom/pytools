@@ -1,2 +1,7 @@
-process_measurement
-delayed_fput
+('populate_rootfs', '/home/synrom/lego/linux/init/initramfs.c')
+('kmalloc_tests_init', '/home/synrom/lego/linux/lib/test_kasan.c')
+('test_user_copy_init', '/home/synrom/lego/linux/lib/test_user_copy.c')
+('load_aout_binary', '/home/synrom/lego/linux/fs/binfmt_aout.c')
+('SYSCALL_DEFINE6', '/home/synrom/lego/linux/mm/mmap.c')
+('SYSCALL_DEFINE6', '/home/synrom/lego/linux/mm/nommu.c')
+('ima_eventdigest_init', '/home/synrom/lego/linux/security/integrity/ima/ima_template_lib.c')
