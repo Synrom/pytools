@@ -1,2 +1,115 @@
  ------------------ found something ------------------
 1: /home/synrom/lego/linux/security/integrity/ima/ima_crypto.c -> __get_free_pages at 132
+ ------------------ found something ------------------
+1: /home/synrom/lego/linux/fs/proc/stat.c -> arch_irq_stat_cpu at 109
+ ------------------ found something ------------------ Ab jetzt werden die nochmal entdeckt
+1: /home/synrom/lego/linux/arch/mips/kvm/trap_emul.c -> asid_version_mask at 1060
+ ------------------ found something ------------------
+1: /home/synrom/lego/linux/arch/mips/kvm/trap_emul.c -> asid_version_mask at 1078
+ ------------------ found something ------------------
+1: /home/synrom/lego/linux/arch/mips/kvm/trap_emul.c -> asid_version_mask at 1232
+ ------------------ found something ------------------
+2: /home/synrom/lego/linux/sound/pci/ctxfi/ctatc.c -> atc_dao_set_status at 1110
+ ------------------ found something ------------------
+1: /home/synrom/lego/linux/arch/mips/kvm/trap_emul.c -> asid_version_mask at 1270
+ ------------------ found something ------------------
+1: /home/synrom/lego/linux/arch/mips/kvm/vz.c -> asid_version_mask at 2459
+ ------------------ found something ------------------ das sind neue
+2: /home/synrom/lego/linux/mm/vmscan.c -> balance_pgdat at 3789
+ ------------------ found something ------------------
+1: /home/synrom/lego/linux/lib/bitmap.c -> bitmap_alloc at 1138
+ ------------------ found something ------------------
+2: /home/synrom/lego/linux/lib/bitmap.c -> bit at 831
+ ------------------ found something ------------------
+1: /home/synrom/lego/linux/lib/bitmap.c -> bitmap_pos_to_ord at 933
+ ------------------ found something ------------------
+1: /home/synrom/lego/linux/mm/page_io.c -> bio_alloc at 35
+ ------------------ found something ------------------
+1: /home/synrom/lego/linux/tools/bpf/bpf_dbg.c -> bpf_disasm at 485
+ ------------------ found something ------------------
+1: /home/synrom/lego/linux/fs/btrfs/check-integrity.c -> btrfs_io_bio_alloc at 1629
+ ------------------ found something ------------------
+1: /home/synrom/lego/linux/sound/core/oss/pcm_oss.c -> boundary_lt at 373
+ ------------------ found something ------------------
+1: /home/synrom/lego/linux/lib/rbtree_test.c -> check at 237
+ ------------------ found something ------------------
+1: /home/synrom/lego/linux/lib/rbtree_test.c -> check at 338
+ ------------------ found something ------------------
+1: /home/synrom/lego/linux/lib/rbtree_test.c -> check at 342
+ ------------------ found something ------------------
+2: /home/synrom/lego/linux/lib/test_rhashtable.c -> clear_bit at 360
+ ------------------ found something ------------------
+2: /home/synrom/lego/linux/lib/test_rhashtable.c -> clear_bit at 360
+ ------------------ found something ------------------
+2: /home/synrom/lego/linux/lib/test_rhashtable.c -> clear_bit at 360
+ ------------------ found something ------------------
+2: /home/synrom/lego/linux/lib/test_rhashtable.c -> clear_bit at 360
+ ------------------ found something ------------------
+2: /home/synrom/lego/linux/lib/test_rhashtable.c -> clear_bit at 360
+ ------------------ found something ------------------
+2: /home/synrom/lego/linux/lib/test_rhashtable.c -> clear_bit at 360
+ ------------------ found something ------------------
+2: /home/synrom/lego/linux/lib/test_rhashtable.c -> clear_bit at 360
+ ------------------ found something ------------------
+2: /home/synrom/lego/linux/lib/test_rhashtable.c -> clear_bit at 360
+ ------------------ found something ------------------
+2: /home/synrom/lego/linux/lib/test_rhashtable.c -> clear_bit at 360
+ ------------------ found something ------------------
+2: /home/synrom/lego/linux/lib/test_rhashtable.c -> clear_bit at 360
+ ------------------ found something ------------------
+2: /home/synrom/lego/linux/lib/test_rhashtable.c -> clear_bit at 394
+ ------------------ found something ------------------
+2: /home/synrom/lego/linux/lib/test_rhashtable.c -> clear_bit at 394
+ ------------------ found something ------------------
+2: /home/synrom/lego/linux/lib/test_rhashtable.c -> clear_bit at 394
+ ------------------ found something ------------------
+2: /home/synrom/lego/linux/lib/test_rhashtable.c -> clear_bit at 394
+ ------------------ found something ------------------
+2: /home/synrom/lego/linux/lib/test_rhashtable.c -> clear_bit at 394
+ ------------------ found something ------------------
+2: /home/synrom/lego/linux/lib/test_rhashtable.c -> clear_bit at 394
+ ------------------ found something ------------------
+2: /home/synrom/lego/linux/lib/test_rhashtable.c -> clear_bit at 394
+ ------------------ found something ------------------
+2: /home/synrom/lego/linux/lib/test_rhashtable.c -> clear_bit at 394
+ ------------------ found something ------------------
+2: /home/synrom/lego/linux/lib/test_rhashtable.c -> clear_bit at 394
+ ------------------ found something ------------------
+2: /home/synrom/lego/linux/lib/test_rhashtable.c -> clear_bit at 394
+ ------------------ found something ------------------
+2: /home/synrom/lego/linux/lib/test_rhashtable.c -> clear_bit at 427
+ ------------------ found something ------------------
+2: /home/synrom/lego/linux/lib/test_rhashtable.c -> clear_bit at 427
+ ------------------ found something ------------------
+2: /home/synrom/lego/linux/lib/test_rhashtable.c -> clear_bit at 427
+ ------------------ found something ------------------
+2: /home/synrom/lego/linux/lib/test_rhashtable.c -> clear_bit at 427
+ ------------------ found something ------------------
+2: /home/synrom/lego/linux/lib/test_rhashtable.c -> clear_bit at 427
+ ------------------ found something ------------------
+2: /home/synrom/lego/linux/lib/test_rhashtable.c -> clear_bit at 427
+ ------------------ found something ------------------
+2: /home/synrom/lego/linux/lib/test_rhashtable.c -> clear_bit at 427
+ ------------------ found something ------------------
+2: /home/synrom/lego/linux/lib/test_rhashtable.c -> clear_bit at 427
+ ------------------ found something ------------------
+2: /home/synrom/lego/linux/lib/test_rhashtable.c -> clear_bit at 427
+ ------------------ found something ------------------
+2: /home/synrom/lego/linux/lib/test_rhashtable.c -> clear_bit at 427
+ ------------------ found something ------------------
+1: /home/synrom/lego/linux/fs/cifs/connect.c -> cifs_negotiate_protocol at 2818
+ ------------------ found something ------------------
+1: /home/synrom/lego/linux/fs/cifs/connect.c -> cifs_setup_session at 2828
+ ------------------ found something ------------------
+1: /home/synrom/lego/linux/fs/cifs/connect.c -> cifs_negotiate_protocol at 2884
+ ------------------ found something ------------------
+1: /home/synrom/lego/linux/fs/cifs/connect.c -> cifs_setup_session at 2886
+ ------------------ found something ------------------
+1: /home/synrom/lego/linux/mm/filemap.c -> clear_bit_unlock at 1179
+ ------------------ found something ------------------
+1: /home/synrom/lego/linux/mm/cma_debug.c -> cma_alloc at 142
+ ------------------ found something ------------------
+1: /home/synrom/lego/linux/fs/exec.c -> close_on_exec at 1782
+ ------------------ found something ------------------
+1: /home/synrom/lego/linux/lib/percpu_counter.c -> compute_batch_value at 182
+

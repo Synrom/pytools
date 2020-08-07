@@ -126,7 +126,7 @@ def check(ptypes):
     for i in range(1,100):
         if i not in ptypes:
             break
-        if ptypes[i][0] == "unsignedint" or ptypes[i][0] == "signedint":
+        if "int" in ptypes[i][0]:
             return True
     return False
 

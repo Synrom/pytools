@@ -1,0 +1,16 @@
+ ------------------ found something ------------------
+1: /home/synrom/lego/linux/init/initramfs.c -> ksys_write at 20
+ ------------------ found something ------------------
+1: /home/synrom/lego/linux/scripts/dtc/libfdt/libfdt.h -> fdt_offset_ptr at 149
+ ------------------ found something ------------------
+1: /home/synrom/lego/linux/fs/isofs/util.c -> mktime64 at 35
+ ------------------ found something ------------------
+1: /home/synrom/lego/linux/fs/isofs/util.c -> mktime64 at 35
+ ------------------ found something ------------------
+1: /home/synrom/lego/linux/fs/f2fs/dir.c -> dir_buckets at 78
+ ------------------ found something ------------------
+1: /home/synrom/lego/linux/lib/cpumask.c -> cpumask_check at 20
+ ------------------ found something ------------------
+1: /home/synrom/lego/linux/fs/f2fs/dir.c -> bucket_blocks at 78
+ ------------------ found something ------------------
+1: /home/synrom/lego/linux/arch/m68k/amiga/cia.c -> generic_handle_irq at 95

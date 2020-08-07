@@ -175,6 +175,8 @@ def find_calls_by_file(func,filename,tags,direction,searchfile):
         patterns = test_call(content[call:],func[1])
         if patterns != False:
             #print "found a call of "+func[1]+" in "+filename+" at "+str(lines)
+            #print "ptype = "+str(func[2])
+            #print "pattern = "+patterns
             patterns = strip_calls(strip_comments(patterns))
             patterns = patterns.split(",")
             for parameter in func[2]:
